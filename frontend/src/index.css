@@ -17,16 +17,11 @@ a {
 }
 
 button {
-  padding: .3rem .5rem;
-  background: none;
-  border: 1px solid black;
-  border-radius: .3rem;
   transition: all ease-in .1s;
 }
 
 button:hover {
-  background: rgb(58, 58, 58);
-  color: white;
+  scale: 1.1;
 }
 
 button:active {
