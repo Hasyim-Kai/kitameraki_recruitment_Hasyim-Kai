@@ -7,6 +7,8 @@ interface Props {
 export default function DefaultLayout({ children }: Props) {
     return <main className="min-h-screen">
         <Navbar />
-        {children}
+        <div className="p-7">
+            {children}
+        </div>
     </main>
 }
