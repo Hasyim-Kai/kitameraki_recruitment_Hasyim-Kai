@@ -1,6 +1,7 @@
 import { TextField } from '@fluentui/react'
 import { Task } from '../../../../infrastructure/task'
 import { useState } from 'react'
+import { BackIcon, DeleteIcon, EditIcon } from '../../global/Icons'
 
 type Props = {
     task: Task
@@ -28,7 +29,7 @@ export default function TakListItem({ task }: Props) {
         {isEdit ? <form className='w-full' onSubmit={handleSubmit}>
             <TextField name='title' label="Title" value={input.title} onChange={handleInput} />
             <TextField name='desc' label="Description" value={input.desc} onChange={handleInput} multiline resizable={false} rows={6} />
-            <button className='mt-5'>Update</button>
+            <button className='mt-5 flex items-center'><EditIcon /> Submit</button>
         </form>
             : <div>
                 <h1 className='text-xl font-semibold'>{task.title}</h1>
@@ -36,8 +37,8 @@ export default function TakListItem({ task }: Props) {
                 <p className='text-sm text-gray-600'>{task?.desc}</p>
             </div>}
         <div className='flex flex-col gap-5'>
-            {isEdit ? <button onClick={handleIsEdit}>Cancel</button> : <button onClick={handleIsEdit}>Edit</button>}
-            <button>Del</button>
+            {isEdit ? <button onClick={handleIsEdit}><BackIcon /></button> : <button onClick={handleIsEdit}><EditIcon /></button>}
+            <button><DeleteIcon /></button>
         </div>
     </div>
 }
