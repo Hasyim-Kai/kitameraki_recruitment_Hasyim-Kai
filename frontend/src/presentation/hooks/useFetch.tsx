@@ -22,7 +22,7 @@ const useFetch = (savePreviousFetchData: boolean, fetcher: any, param: any) => {
         fetchData();
     }, [fetcher, param]);
 
-    return { data, loading, error };
+    return { data, loading, error, fetchData };
 };
 
 export default useFetch;

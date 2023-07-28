@@ -10,14 +10,14 @@ import ErrorBanner from "../../component/global/ErrorBanner";
 export default function Dashboard() {
     const [page, setPage] = useState<number>(1)
     const addPage = () => { setPage(page + 1) }
-    const { data, loading, error } = useFetch(true, fetchTask, page);
+    const { data, loading, error, fetchData } = useFetch(true, fetchTask, page);
 
     return <DefaultLayout>
         <section className="grid grid-cols-1 lg:grid-cols-2 gap-5">
             {loading ? <Loading />
                 : error ? <ErrorBanner />
                     : data?.length === 0 ? <div>Cannot Found Anything</div>
-                        : data?.map((task: Task, i: number) => <TakListItem key={i} task={task} />)}
+                        : data?.map((task: Task, i: number) => <TakListItem key={i} task={task} refetchFn={fetchData} />)}
         </section>
         <PrimaryBtn txt="+ More" style="mt-7" fn={addPage} />
     </DefaultLayout>
