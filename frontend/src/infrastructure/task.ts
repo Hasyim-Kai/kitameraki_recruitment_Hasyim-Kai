@@ -37,7 +37,7 @@ export const fetchPostTask = async (input: Task) => {
 }
 
 export const fetchUpdateTask = async (input: Task) => {
-    const res = await fetch(url, {
+    const res = await fetch(`${url}/${input.id}`, {
         method: 'PUT',
         body: JSON.stringify(input),
         cache: 'default',
@@ -50,7 +50,7 @@ export const fetchUpdateTask = async (input: Task) => {
 }
 
 export const fetchDelTask = async (id: number | string) => {
-    const res = await fetch(url + id, {
+    const res = await fetch(`${url}/${id}`, {
         method: 'DELETE',
         cache: 'default',
     })

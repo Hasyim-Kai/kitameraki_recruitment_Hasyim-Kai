@@ -20,7 +20,8 @@ const getAll = async (req: Request, res: Response) => {
 
 const add = async (req: Request, res: Response) => {
   try {
-    const newTask = { id: tempMemory.length, ...req.body };
+    const id = Math.floor(Math.random() * 100);
+    const newTask = { id, ...req.body };
     tempMemory.push(newTask);
     return res.status(201).json({ status: true });
   } catch (err) {
