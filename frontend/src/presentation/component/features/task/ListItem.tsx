@@ -1,5 +1,5 @@
 import { TextField } from '@fluentui/react'
-import { Task, fetchDelTask, fetchUpdateTask } from '../../../../infrastructure/task'
+import { Task, fetchDelTask, fetchUpdateTask, formSettingLsKey } from '../../../../infrastructure/task'
 import { useEffect, useState } from 'react'
 import { BackIcon, DeleteIcon, EditIcon } from '../../global/Icons'
 import useDataMutator from '../../../hooks/useMutate'
@@ -12,6 +12,7 @@ type Props = {
 }
 
 export default function TakListItem({ task, refetchFn }: Props) {
+    const [optionalText, setOptionalText] = useState([])
     const [isEdit, setIsEdit] = useState<boolean>(false)
     function handleIsEdit() { setIsEdit(!isEdit) }
     const [input, setInput] = useState<Task>({
@@ -39,6 +40,9 @@ export default function TakListItem({ task, refetchFn }: Props) {
             setIsEdit(false)
             refetchFn()
         }
+        const formSettingJson = localStorage.getItem(formSettingLsKey) || '[]'
+        const formSettingParsed = JSON.parse(formSettingJson);
+        setOptionalText(formSettingParsed)
     }, [data])
 
     return <div className='flex justify-between items-center gap-5 border p-5 rounded-md shadow-sm'>
@@ -51,7 +55,7 @@ export default function TakListItem({ task, refetchFn }: Props) {
                 </form>
                     : <div>
                         <h1 className='text-xl font-semibold'>{task.title}</h1>
-                        <p className='text-sm'><i>{task?.date}</i></p>
+                        {optionalText.map((item: any) => <p className='text-sm'>{task[item?.txt]}</p>)}
                         <p className='text-sm text-gray-600'>{task?.desc}</p>
                     </div>}
         <div className='flex flex-col gap-5'>
