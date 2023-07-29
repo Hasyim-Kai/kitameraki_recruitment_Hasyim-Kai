@@ -5,16 +5,7 @@ export interface Task {
     date?: string
 }
 
-export const dummyTask = [
-    {
-        title: 'coba 1',
-        desc: 'lorem ipsum sdfa  sdfa sadfasdfa sdfasdf asdfgasrgw ef lorem ipsum sdfa  sdfa sadfasdfa sdfasdf asdfgasrgw ef lorem ipsum sdfa  sdfa sadfasdfa sdfasdf asdfgasrgw ef lorem ipsum sdfa  sdfa sadfasdfa sdfasdf asdfgasrgw ef lorem ipsum sdfa  sdfa sadfasdfa sdfasdf asdfgasrgw ef lorem ipsum sdfa  sdfa sadfasdfa sdfasdf asdfgasrgw ef lorem ipsum sdfa  sdfa sadfasdfa sdfasdf asdfgasrgw ef'
-    },
-    {
-        title: 'coba 2',
-        desc: 'lorem ipsum sdfa  sdfa sadfasdfa sdfasdf asdfgasrgw ef'
-    }
-]
+export const formSettingLsKey = `form_setting_ls`
 
 const url = `http://localhost:4000/api/task`
 
