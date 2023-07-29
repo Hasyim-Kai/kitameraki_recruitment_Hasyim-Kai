@@ -106,7 +106,7 @@ export default function SettingTaskPage() {
                 <div className=''>
                     <div className='flex gap-5'>
                         <h1 className='text-3xl font-semibold mb-3'>Form Setting</h1>
-                        <button className='border p-3 rounded-md' onClick={saveSetting}>Save Setting</button>
+                        <button className='border px-3 py-1 rounded-md' onClick={saveSetting}>Save Setting</button>
                     </div>
                     <p className='font-medium mb-3'>Standard Field</p>
                     <TextField name='title' type="text" label="Title" required disabled />

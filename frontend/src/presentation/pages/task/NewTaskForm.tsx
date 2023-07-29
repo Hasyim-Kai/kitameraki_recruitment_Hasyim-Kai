@@ -9,7 +9,7 @@ import { useNavigate } from "react-router-dom";
 
 export default function NewTaskForm() {
     const navigate = useNavigate()
-    const [formSetting, setFormSetting] = useState<Task>([])
+    const [formSetting, setFormSetting] = useState([])
     const [input, setInput] = useState<Task>({
         title: '',
         desc: ''
@@ -26,7 +26,7 @@ export default function NewTaskForm() {
         const formSettingJson = localStorage.getItem(formSettingLsKey) || '[]'
         const formSettingParsed = JSON.parse(formSettingJson);
         setFormSetting(formSettingParsed)
-        if (data?.status) { navigate(-1) }
+        if (data?.status) { navigate('/') }
     }, [data])
 
     return <DefaultLayout>
