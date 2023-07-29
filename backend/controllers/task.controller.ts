@@ -37,7 +37,7 @@ const update = async (req: Request, res: Response) => {
     }
     const targetId = tempMemory.findIndex((task: Task) => task.id === id);
     if (targetId !== -1) {
-      tempMemory[targetId] = { id, ...req.body }
+      tempMemory[targetId] = { ...tempMemory[targetId], ...req.body }
       return res.status(201).json({ status: true, message: `Edit Success` });
     } else {
       return res.status(201).json({ status: false, message: `Not Found` });
