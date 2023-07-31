@@ -1,39 +1,24 @@
-import { ITextFieldStyles, TextField } from "@fluentui/react";
 import { useState } from "react";
-import DefaultLayout from "../../component/layout/Default";
+import DefaultLayout from "../../layout/Default";
+import { Task, fetchTask } from "../../../infrastructure/task";
+import TakListItem from "../../component/features/task/ListItem";
+import PrimaryBtn from "../../component/global/PrimaryBtn";
+import useFetch from "../../hooks/useFetch";
+import Loading from "../../component/global/Loading";
+import ErrorBanner from "../../component/global/ErrorBanner";
 
 export default function Dashboard() {
-    const [input, setInput] = useState({
-        email: ``,
-        desc: ``
-    })
-    function handleInput(e: any) {
-        setInput({
-            ...input,
-            [e.target.name]: e.target.value
-        })
-    }
-    function handleSubmit(e: any) {
-        e.preventDefault()
-        console.log(input)
-    }
+    const [page, setPage] = useState<number>(1)
+    const addPage = () => { setPage(page + 1) }
+    const { data, loading, error, fetchData } = useFetch(true, fetchTask, page);
 
-    const textFieldStyles: Partial<ITextFieldStyles> = { fieldGroup: { width: 100 } };
     return <DefaultLayout>
-        <section>
-            <TextField
-                name="email"
-                label="Basic controlled TextField"
-                onChange={handleInput}
-                styles={textFieldStyles}
-            />
-            <TextField
-                name="desc"
-                label="Controlled TextField limiting length of value to 5"
-                onChange={handleInput}
-                styles={textFieldStyles}
-            />
-            <button onClick={handleSubmit}>aaa</button>
+        <section className="grid grid-cols-1 lg:grid-cols-2 gap-5">
+            {loading ? <Loading />
+                : error ? <ErrorBanner />
+                    : data?.length === 0 ? <div>Cannot Found Anything</div>
+                        : data?.map((task: Task, i: number) => <TakListItem key={i} task={task} refetchFn={fetchData} />)}
         </section>
+        <PrimaryBtn txt="+ More" style="mt-7" fn={addPage} />
     </DefaultLayout>
 }
